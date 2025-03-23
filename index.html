@@ -16,40 +16,45 @@
             margin: auto;
             position: relative;
         }
+        .emoji {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            touch-action: none;
+            user-select: none;
+            cursor: move;
+        }
     </style>
-<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 </head>
 <body>
     <h1>XmasDave's Interactive Treasure Hunt Canvas</h1>
     <div id="canvas">
-        <p>Interactive Canvas Coming Soon!</p>
-<div id="canvas">
-    <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox Emoji">
-</div>
-
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox Emoji">
     </div>
-<script>
-interact('.emoji').draggable({
-  modifiers: [
-    interact.modifiers.restrictRect({
-      restriction: '#canvas',
-      endOnly: true
+
+    <script>
+    interact('.emoji').draggable({
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: '#canvas',
+          endOnly: true
+        })
+      ],
+      listeners: {
+        move (event) {
+          const target = event.target
+          const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+          const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+          target.style.transform = `translate(${x}px, ${y}px)`
+
+          target.setAttribute('data-x', x)
+          target.setAttribute('data-y', y)
+        }
+      }
     })
-  ],
-  listeners: {
-    move (event) {
-      const target = event.target
-      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-
-      target.style.transform = `translate(${x}px, ${y}px)`
-
-      target.setAttribute('data-x', x)
-      target.setAttribute('data-y', y)
-    }
-  }
-})
-</script>
+    </script>
 
 </body>
 </html>
