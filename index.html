@@ -3,49 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>XmasDave Treasure Hunt</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-    }
-    #canvas {
-        border: 2px dashed #C2972F;
-        width: 90%;
-        height: 600px;
-        margin: auto;
-        position: relative;
-    }
 
-    /* New toolbar CSS */
-    #toolbar {
-        padding: 10px;
-        margin-bottom: 15px;
-        border-bottom: 2px solid #C2972F;
-        text-align: center;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            text-align: center;
+            padding: 20px;
+        }
 
-    .toolbar-emoji {
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        margin: 5px;
-        transition: transform 0.2s;
-    }
+        #canvas {
+            border: 2px dashed #C2972F;
+            width: 90%;
+            height: 600px;
+            margin: auto;
+            position: relative;
+        }
 
-    .toolbar-emoji:hover {
-        transform: scale(1.2);
-    }
+        /* Toolbar CSS */
+        #toolbar {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #C2972F;
+            text-align: center;
+        }
 
-    .emoji {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        touch-action: none;
-        user-select: none;
-        cursor: move;
-    }
-</style>
+        .toolbar-emoji {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+
+        .toolbar-emoji:hover {
+            transform: scale(1.2);
+        }
+
+        .emoji {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            touch-action: none;
+            user-select: none;
+            cursor: move;
+        }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 </head>
@@ -55,71 +57,28 @@
 
     <!-- Emoji Selection Toolbar -->
     <div id="toolbar">
-        <img class="toolbar-emoji" src="https://twemoji.maxcdn.com/v/latest/72x72/1f4ec.png" alt="Mailbox" data-emoji="📬">
-        <img class="toolbar-emoji" src="https://twemoji.maxcdn.com/v/latest/72x72/1f525.png" alt="Fire Pit" data-emoji="🔥">
-        <img class="toolbar-emoji" src="https://twemoji.maxcdn.com/v/latest/72x72/1f9fa.png" alt="Basket" data-emoji="🧺">
-        <img class="toolbar-emoji" src="https://twemoji.maxcdn.com/v/latest/72x72/1f6b2.png" alt="Bike" data-emoji="🚲">
+        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" alt="Mailbox">
+        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" alt="Fire Pit">
+        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f9fa.png" alt="Basket">
+        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6b2.png" alt="Bike">
         <!-- Add additional emojis here -->
     </div>
 
     <!-- Canvas -->
     <div id="canvas">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox Emoji">
+        <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox Emoji">
     </div>
 
     <script>
-    interact('.emoji').draggable({
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: '#canvas',
-          endOnly: true
-        })
-      ],
-      listeners: {
-        move (event) {
-          const target = event.target;
-          const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-          const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-          target.style.transform = `translate(${x}px, ${y}px)`;
-
-          target.setAttribute('data-x', x);
-          target.setAttribute('data-y', y);
-        }
-      }
-    })
-    </script>
-<script>
-// Function to add emoji to canvas at random position
-function addEmojiToCanvas(src) {
-    const canvas = document.getElementById('canvas');
-    const img = document.createElement('img');
-    img.src = src;
-    img.className = 'emoji';
-    img.style.left = Math.random() * (canvas.clientWidth - 50) + 'px';
-    img.style.top = Math.random() * (canvas.clientHeight - 50) + 'px';
-    canvas.appendChild(img);
-}
-
-// Add click events to toolbar emojis
-document.querySelectorAll('.toolbar-emoji').forEach(emoji => {
-    emoji.addEventListener('click', () => {
-        addEmojiToCanvas(emoji.src);
-    });
-});
-
-// Make newly added emojis draggable (using InteractJS)
-interact('#canvas').on('DOMNodeInserted', event => {
-    if (event.target.classList.contains('emoji')) {
-        interact(event.target).draggable({
+        interact('.emoji').draggable({
             modifiers: [
                 interact.modifiers.restrictRect({
-                    restriction: '#canvas',
+                    restriction: '#canvas', 
                     endOnly: true
                 })
             ],
             listeners: {
-                move (event) {
+                move(event) {
                     const target = event.target;
                     const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
                     const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
@@ -130,9 +89,52 @@ interact('#canvas').on('DOMNodeInserted', event => {
                 }
             }
         });
-    }
-});
-</script>
+    </script>
+
+    <script>
+        <!-- Function to add emoji to canvas at random position -->
+        function addEmojiToCanvas(src) {
+            const canvas = document.getElementById('canvas');
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'emoji';
+            img.style.left = Math.random() * (canvas.clientWidth - 50) + 'px';
+            img.style.top = Math.random() * (canvas.clientHeight - 50) + 'px';
+            canvas.appendChild(img);
+        }
+
+        <!-- Add click events to toolbar emojis -->
+        document.querySelectorAll('.toolbar-emoji').forEach(emoji => {
+            emoji.addEventListener('click', () => {
+                addEmojiToCanvas(emoji.src);
+            });
+        });
+
+        <!-- Make newly added emojis draggable (using InteractJS) -->
+        interact('#canvas').on('DOMNodeInserted', event => {
+            if (event.target.classList.contains('emoji')) {
+                interact(event.target).draggable({
+                    modifiers: [
+                        interact.modifiers.restrictRect({
+                            restriction: '#canvas',
+                            endOnly: true
+                        })
+                    ],
+                    listeners: {
+                        move(event) {
+                            const target = event.target;
+                            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                            target.style.transform = `translate(${x}px, ${y}px)`;
+                            target.setAttribute('data-x', x);
+                            target.setAttribute('data-y', y);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
