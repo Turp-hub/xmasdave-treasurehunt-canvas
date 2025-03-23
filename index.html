@@ -4,55 +4,137 @@
     <meta charset="UTF-8">
     <title>XmasDave Treasure Hunt</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif; 
-            text-align: center;
-            padding: 20px;
-        }
+<style>
+    /* General page styling */
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
 
-        #canvas {
-            border: 2px dashed #C2972F;
-            width: 90%;
-            height: 600px;
-            margin: auto;
-            position: relative;
-        }
+    /* Canvas styling */
+    #canvas {
+        border: 2px dashed #C2972F;
+        width: 90%;
+        height: 600px;
+        margin: auto;
+        position: relative;
+    }
 
-        /* Toolbar CSS */
-        #toolbar {
-            padding: 10px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #C2972F;
-            text-align: center;
-        }
+    /* Emoji toolbar styling */
+    #toolbar {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #C2972F;
+        text-align: center;
+    }
 
-        .toolbar-emoji {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            margin: 5px;
-            transition: transform 0.2s;
-        }
+    .toolbar-emoji {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        margin: 5px;
+        transition: transform 0.2s;
+    }
 
-        .toolbar-emoji:hover {
-            transform: scale(1.2);
-        }
+    .toolbar-emoji:hover {
+        transform: scale(1.2);
+    }
 
-        .emoji {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            touch-action: none;
-            user-select: none;
-            cursor: move;
-        }
-    </style>
+    /* Emoji placed on canvas styling */
+    .emoji {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        touch-action: none;
+        user-select: none;
+        cursor: move;
+    }
+
+    /* Navigation bar styling */
+    #menu-bar {
+        background-color: #C2972F;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    #menu-bar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #menu-bar > ul > .dropdown {
+        display: inline-block;
+        position: relative;
+        padding: 5px 15px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 180px;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+
+    .dropdown-content li {
+        color: black;
+        padding: 8px 12px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .dropdown-content li:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
 
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 </head>
 
 <body>
+<!-- Navigation Bar -->
+<nav id="menu-bar">
+    <ul>
+        <li class="dropdown">📍 Landmarks ▼
+            <ul class="dropdown-content">
+                <li>Outdoor Locations</li>
+                <li>Indoor Locations</li>
+                <li>📷 Custom Photo Landmark</li>
+                <li>😀 Custom Emoji Landmark</li>
+            </ul>
+        </li>
+
+        <li class="dropdown">🧩 Clues & Challenges ▼
+            <ul class="dropdown-content">
+                <li>Word Puzzles</li>
+                <li>Physical Challenges</li>
+            </ul>
+        </li>
+
+        <li class="dropdown">🎨 Decorations ▼
+            <ul class="dropdown-content">
+                <li>Holiday Symbols</li>
+                <li>Pirate Symbols</li>
+            </ul>
+        </li>
+
+        <li class="dropdown">✏️ Canvas Tools ▼
+            <ul class="dropdown-content">
+                <li>Dotted Line</li>
+                <li>Add Text Box</
+
     <h1>XmasDave's Interactive Treasure Hunt Canvas</h1>
 
     <!-- Emoji Selection Toolbar -->
