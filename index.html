@@ -107,36 +107,41 @@
 </head>
 
 <body>
-<!-- Navigation Bar -->
-<nav id="menu-bar">
-    <ul>
-        <li class="dropdown">📍 Landmarks ▼
-            <ul class="dropdown-content">
-                <li>Outdoor Locations</li>
-                <li>Indoor Locations</li>
-                <li>📷 Custom Photo Landmark</li>
-                <li>😀 Custom Emoji Landmark</li>
-            </ul>
-        </li>
+    <!-- Navigation Bar -->
+    <nav id="menu-bar">
+        <ul>
+            <li class="dropdown">📍 Landmarks ▼
+                <ul class="dropdown-content">
+                    <li>Outdoor Locations</li>
+                    <li>Indoor Locations</li>
+                    <li>📷 Custom Photo Landmark</li>
+                    <li>😀 Custom Emoji Landmark</li>
+                </ul>
+            </li>
 
-        <li class="dropdown">🧩 Clues & Challenges ▼
-            <ul class="dropdown-content">
-                <li>Word Puzzles</li>
-                <li>Physical Challenges</li>
-            </ul>
-        </li>
+            <li class="dropdown">🧩 Clues & Challenges ▼
+                <ul class="dropdown-content">
+                    <li>Word Puzzles</li>
+                    <li>Physical Challenges</li>
+                </ul>
+            </li>
 
-        <li class="dropdown">🎨 Decorations ▼
-            <ul class="dropdown-content">
-                <li>Holiday Symbols</li>
-                <li>Pirate Symbols</li>
-            </ul>
-        </li>
+            <li class="dropdown">🎨 Decorations ▼
+                <ul class="dropdown-content">
+                    <li>Holiday Symbols</li>
+                    <li>Pirate Symbols</li>
+                </ul>
+            </li>
 
-        <li class="dropdown">✏️ Canvas Tools ▼
-            <ul class="dropdown-content">
-                <li>Dotted Line</li>
-                <li>Add Text Box</
+            <li class="dropdown">✏️ Canvas Tools ▼
+                <ul class="dropdown-content">
+                    <li>Dotted Line</li>
+                    <li>Add Text Box</li>
+                    <li>Remove Item</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
     <h1>XmasDave's Interactive Treasure Hunt Canvas</h1>
 
@@ -155,10 +160,11 @@
     </div>
 
     <script>
+        // Make existing .emoji items draggable
         interact('.emoji').draggable({
             modifiers: [
                 interact.modifiers.restrictRect({
-                    restriction: '#canvas', 
+                    restriction: '#canvas',
                     endOnly: true
                 })
             ],
@@ -174,10 +180,8 @@
                 }
             }
         });
-    </script>
 
-    <script>
-        <!-- Function to add emoji to canvas at random position -->
+        // Add emoji to canvas at a random position
         function addEmojiToCanvas(src) {
             const canvas = document.getElementById('canvas');
             const img = document.createElement('img');
@@ -188,14 +192,14 @@
             canvas.appendChild(img);
         }
 
-        <!-- Add click events to toolbar emojis -->
+        // Add click events to toolbar emojis
         document.querySelectorAll('.toolbar-emoji').forEach(emoji => {
             emoji.addEventListener('click', () => {
                 addEmojiToCanvas(emoji.src);
             });
         });
 
-        <!-- Make newly added emojis draggable (using InteractJS) -->
+        // Make new .emoji items draggable when added to canvas
         interact('#canvas').on('DOMNodeInserted', event => {
             if (event.target.classList.contains('emoji')) {
                 interact(event.target).draggable({
@@ -220,6 +224,6 @@
             }
         });
     </script>
-
 </body>
+
 </html>
