@@ -5,6 +5,10 @@
     <title>XmasDave Treasure Hunt</title>
 
 <style>
+    :root {
+        --primary-color: #C2972F; /* Easily change theme color later */
+    }
+
     /* General page styling */
     body {
         font-family: Arial, sans-serif;
@@ -14,7 +18,7 @@
 
     /* Canvas styling */
     #canvas {
-        border: 2px dashed #C2972F;
+        border: 2px dashed var(--primary-color);
         width: 90%;
         height: 600px;
         margin: auto;
@@ -25,7 +29,7 @@
     #toolbar {
         padding: 10px;
         margin-bottom: 15px;
-        border-bottom: 2px solid #C2972F;
+        border-bottom: 2px solid var(--primary-color);
         text-align: center;
     }
 
@@ -53,10 +57,9 @@
 
     /* Navigation bar styling */
     #menu-bar {
-        background-color: #C2972F;
+        background-color: var(--primary-color);
         padding: 10px;
         margin-bottom: 15px;
-        font-family: Arial, sans-serif;
         text-align: center;
     }
 
