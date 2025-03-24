@@ -238,6 +238,23 @@
             }
         });
     </script>
+    <script>
+        function sendHeight() {
+            const height = document.documentElement.scrollHeight;
+            parent.postMessage({ type: 'resizeCanvasIframe', height }, '*');
+        }
+
+        // Send height on load
+        window.addEventListener('load', sendHeight);
+
+        // Optionally send height after emojis are added or dragged
+        const observer = new MutationObserver(sendHeight);
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        window.addEventListener('resize', sendHeight);
+    </script>
+
 </body>
 
 </html>
+
