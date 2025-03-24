@@ -6,7 +6,7 @@
 
 <style>
     :root {
-        --primary-color: #C2972F; /* Easily change theme color later */
+        --primary-color: #C2972F;
     }
 
     /* General page styling */
@@ -14,6 +14,12 @@
         font-family: Arial, sans-serif;
         text-align: center;
         padding: 20px;
+        background-color: #D76F48; /* Optional background like your screenshot */
+    }
+
+    #app-wrapper {
+        position: relative;
+        z-index: 1;
     }
 
     /* Canvas styling */
@@ -22,7 +28,10 @@
         width: 90%;
         height: 600px;
         margin: auto;
+        /* Keep relative if you're using positioned emojis inside */
         position: relative;
+        z-index: 1;
+        background-color: white; /* Optional background to contrast with decorations */
     }
 
     /* Emoji toolbar styling */
@@ -45,7 +54,7 @@
         transform: scale(1.2);
     }
 
-    /* Emoji placed on canvas styling */
+    /* Emoji placed on canvas */
     .emoji {
         width: 50px;
         height: 50px;
@@ -61,6 +70,8 @@
         padding: 10px;
         margin-bottom: 15px;
         text-align: center;
+        position: relative;
+        z-index: 10;
     }
 
     #menu-bar ul {
@@ -80,7 +91,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
+        background-color: #fff;
         min-width: 180px;
         border: 1px solid #ddd;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -107,58 +118,60 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav id="menu-bar">
-        <ul>
-            <li class="dropdown">📍 Landmarks ▼
-                <ul class="dropdown-content">
-                    <li>Outdoor Locations</li>
-                    <li>Indoor Locations</li>
-                    <li>📷 Custom Photo Landmark</li>
-                    <li>😀 Custom Emoji Landmark</li>
-                </ul>
-            </li>
+    <div id="app-wrapper">
+        <!-- Navigation Bar -->
+        <nav id="menu-bar">
+            <ul>
+                <li class="dropdown">📍 Landmarks ▼
+                    <ul class="dropdown-content">
+                        <li>Outdoor Locations</li>
+                        <li>Indoor Locations</li>
+                        <li>📷 Custom Photo Landmark</li>
+                        <li>😀 Custom Emoji Landmark</li>
+                    </ul>
+                </li>
 
-            <li class="dropdown">🧩 Clues & Challenges ▼
-                <ul class="dropdown-content">
-                    <li>Word Puzzles</li>
-                    <li>Physical Challenges</li>
-                </ul>
-            </li>
+                <li class="dropdown">🧩 Clues & Challenges ▼
+                    <ul class="dropdown-content">
+                        <li>Word Puzzles</li>
+                        <li>Physical Challenges</li>
+                    </ul>
+                </li>
 
-            <li class="dropdown">🎨 Decorations ▼
-                <ul class="dropdown-content">
-                    <li>Holiday Symbols</li>
-                    <li>Pirate Symbols</li>
-                </ul>
-            </li>
+                <li class="dropdown">🎨 Decorations ▼
+                    <ul class="dropdown-content">
+                        <li>Holiday Symbols</li>
+                        <li>Pirate Symbols</li>
+                    </ul>
+                </li>
 
-            <li class="dropdown">✏️ Canvas Tools ▼
-                <ul class="dropdown-content">
-                    <li>Dotted Line</li>
-                    <li>Add Text Box</li>
-                    <li>Remove Item</li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+                <li class="dropdown">✏️ Canvas Tools ▼
+                    <ul class="dropdown-content">
+                        <li>Dotted Line</li>
+                        <li>Add Text Box</li>
+                        <li>Remove Item</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-    <h1>XmasDave's Interactive Treasure Hunt Canvas</h1>
+        <h1>XmasDave's Interactive Treasure Hunt Canvas</h1>
 
-    <!-- Emoji Selection Toolbar -->
-    <div id="toolbar">
-        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" alt="Mailbox">
-        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" alt="Fire Pit">
-        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f9fa.png" alt="Basket">
-        <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6b2.png" alt="Bike">
-        <!-- Add additional emojis here -->
+        <!-- Emoji Selection Toolbar -->
+        <div id="toolbar">
+            <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" alt="Mailbox">
+            <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" alt="Fire Pit">
+            <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f9fa.png" alt="Basket">
+            <img class="toolbar-emoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6b2.png" alt="Bike">
+        </div>
+
+        <!-- Canvas -->
+        <div id="canvas">
+            <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox">
+        </div>
     </div>
 
-    <!-- Canvas -->
-    <div id="canvas">
-        <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4ec.png" class="emoji" id="mailbox" alt="Mailbox Emoji">
-    </div>
-
+    <!-- InteractJS + Canvas Behavior -->
     <script>
         // Make existing .emoji items draggable
         interact('.emoji').draggable({
@@ -187,6 +200,7 @@
             const img = document.createElement('img');
             img.src = src;
             img.className = 'emoji';
+            img.alt = 'Emoji Icon';
             img.style.left = Math.random() * (canvas.clientWidth - 50) + 'px';
             img.style.top = Math.random() * (canvas.clientHeight - 50) + 'px';
             canvas.appendChild(img);
@@ -199,7 +213,7 @@
             });
         });
 
-        // Make new .emoji items draggable when added to canvas
+        // Make new .emoji items draggable
         interact('#canvas').on('DOMNodeInserted', event => {
             if (event.target.classList.contains('emoji')) {
                 interact(event.target).draggable({
